@@ -56,6 +56,11 @@ class IcaTextEditor:
             "newline": "blue",
             "import": "yellow",
             "wait": "yellow",
+            "File": "orange",
+            "Read": "orange",
+            "ReadPrint": "orange",
+            "Write": "orange",
+            "Append": "orange",
         }
 
         self.text_area.tag_remove("keyword", "1.0", tk.END)
