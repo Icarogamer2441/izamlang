@@ -1,0 +1,29 @@
+start Main run
+import[teste]
+
+callfunc{test1}
+callpyfunc{test2}
+
+string hw = hello world! << endvar
+
+Output.PrintVar >> hw << newline
+
+int n1 = 10 << endvar
+
+Output.PrintMsg >> the var n1 have the value of:  << unicline
+Output.PrintVar >> n1 << newline
+
+int n2 = 10 << endvar
+
+nifs(n1,n2) >> ifa
+ifa$ start Main run $codend
+ifa$ Output.PrintMsg >> A << unicline $codend
+endifa
+
+wait(2)
+
+Output.PrintMsg >>  test message << newline
+
+wait(1)
+
+Output.PrintMsg >> test message 2 << newline
