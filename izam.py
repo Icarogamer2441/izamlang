@@ -121,6 +121,29 @@ def interpret(code):
                 elif line.startswith("system"):
                     command = line.split("(")[1].split(")")[0].strip("\"\'")
                     subprocess.run(command, shell=True)
+                elif line.startswith("File"):
+                    filetype = line.split(".")[1].strip("\"\'")
+                    if filetype.startswith("Read"):
+                        filename = line.split("(")[1].split(",")[0].strip("\"\'")
+                        varname = line.split(",")[1].split(")")[0].strip("\"\'")
+                        with open(filename, "r") as fi:
+                            content = fi.read()
+                        variables[varname] = content
+                    elif filetype.startswith("Write"):
+                        filename = line.split("(")[1].split(",")[0].strip("\"\'")
+                        varname = line.split(",")[1].split(")")[0].strip("\"\'")
+                        with open(filename, "w") as fi:
+                            fi.write(variables.get(varname))
+                    elif filetype.startswith("Append"):
+                        filename = line.split("(")[1].split(",")[0].strip("\"\'")
+                        varname = line.split(",")[1].split(")")[0].strip("\"\'")
+                        with open(filename, "a") as fi:
+                            fi.write(variables.get(varname))
+                    elif filetype.startswith("ReadPrint"):
+                        filename = line.split("(")[1].split(")")[0].strip("\"\'")
+                        with open(filename, "r") as fi:
+                            content = fi.read()
+                        print(content)
 def execute_file(filename):
     if filename.endswith(".izam"):
         with open(filename, "r") as f:
