@@ -118,9 +118,9 @@ def interpret(code):
                     with open(pyfuncname + ".py", "w") as fi:
                         fi.write(pyfunccode)
                     if platform.system() == "Windows":
-                        subprocess.run(f"python {pyfuncname + '.py'}")
+                        subprocess.run(f"python {pyfuncname + '.py'}", shell=True)
                     else:
-                        subprocess.run(f"python3 {pyfuncname + '.py'}")
+                        subprocess.run(f"python3 {pyfuncname + '.py'}", shell=True)
                 elif line.startswith("wait"):
                     times = line.split("(")[1].split(")")[0].strip("\"\'")
                     time.sleep(int(times))
@@ -164,9 +164,9 @@ def interpret(code):
                 elif line.startswith("pyimport"):
                     pyfile = line.split("[")[1].split("]")[0].strip("\"\'")
                     if platform.system() == "Windows":
-                        subprocess.run(f"python {pyfile + '.py'}")
+                        subprocess.run(f"python {pyfile + '.py'}", shell=True)
                     else:
-                        subprocess.run(f"python3 {pyfile + '.py'}")
+                        subprocess.run(f"python3 {pyfile + '.py'}", shell=True)
                 elif line.startswith("break"):
                     break
 def execute_file(filename):
