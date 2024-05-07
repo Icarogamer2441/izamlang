@@ -1,6 +1,6 @@
 import time
-import random
 import subprocess
+import platform
 
 variables = {}
 functions = {}
@@ -115,7 +115,12 @@ def interpret(code):
                     pyfuncname = line.split("{")[1].split("}")[0].strip("\"\'")
                     pyfuncarray = pycodes.get(pyfuncname)
                     pyfunccode = "\n".join(pyfuncarray)
-                    exec(pyfunccode)
+                    with open(pyfuncname + ".py", "w") as fi:
+                        fi.write(pyfunccode)
+                    if platform.system() == "Windows":
+                        subprocess.run(f"python {pyfuncname + '.py'}")
+                    else:
+                        subprocess.run(f"python3 {pyfuncname + '.py'}")
                 elif line.startswith("wait"):
                     times = line.split("(")[1].split(")")[0].strip("\"\'")
                     time.sleep(int(times))
@@ -158,9 +163,10 @@ def interpret(code):
                             break
                 elif line.startswith("pyimport"):
                     pyfile = line.split("[")[1].split("]")[0].strip("\"\'")
-                    with open(pyfile + ".py", "r") as fi:
-                        content = fi.read()
-                    exec(content)
+                    if platform.system() == "Windows":
+                        subprocess.run(f"python {pyfile + '.py'}")
+                    else:
+                        subprocess.run(f"python3 {pyfile + '.py'}")
                 elif line.startswith("break"):
                     break
 def execute_file(filename):
