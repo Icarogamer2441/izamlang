@@ -6,6 +6,7 @@ variables = {}
 functions = {}
 ifs = []
 pycodes = {}
+repeats = {}
 
 def interpret(code):
     lines = code.split("\n")
@@ -144,6 +145,24 @@ def interpret(code):
                         with open(filename, "r") as fi:
                             content = fi.read()
                         print(content)
+                elif line.startswith("repeat"):
+                    times = line.split("(")[1].split(") >> ")[0].strip("\"\'")
+                    repeatname = line.split(") >> ")[1].strip("\"\'")
+                    repeats[repeatname] = []
+                    for code in lines:
+                        if code.startswith(f"{repeatname}"):
+                            restcode = code.split("# ")[1].split(" #codend")[0].strip("\"\'")
+                            repeats[repeatname].append(restcode)
+                        elif code.startswith(f"end{repeatname}"):
+                            interpret("\n".join(repeats[repeatname]))
+                            break
+                elif line.startswith("pyimport"):
+                    pyfile = line.split("[")[1].split("]")[0].strip("\"\'")
+                    with open(pyfile + ".py", "r") as fi:
+                        content = fi.read()
+                    exec(content)
+                elif line.startswith("break"):
+                    break
 def execute_file(filename):
     if filename.endswith(".izam"):
         with open(filename, "r") as f:
