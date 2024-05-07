@@ -1,0 +1,10 @@
+start Main run
+
+func(test1)
+test1@ start Main run @codend
+test1@ Output.PrintMsg >> Hello, world func! << newline @codend
+endfunctest1
+
+pyfunc(test2)
+test2! print("Hello, world python!") !codend
+endpyfunctest2
