@@ -124,6 +124,9 @@ def interpret(code):
                 elif line.startswith("wait"):
                     times = line.split("(")[1].split(")")[0].strip("\"\'")
                     time.sleep(int(times))
+                elif line.startswith("system"):
+                    command = line.split("(")[1].split(")")[0].strip("\"\'")
+                    subprocess.run(command, shell=True)
                 elif line.startswith("File"):
                     filetype = line.split(".")[1].strip("\"\'")
                     if filetype.startswith("Read"):
@@ -158,6 +161,12 @@ def interpret(code):
                         elif code.startswith(f"end{repeatname}"):
                             interpret("\n".join(repeats[repeatname]))
                             break
+                elif line.startswith("pyimport"):
+                    pyfile = line.split("[")[1].split("]")[0].strip("\"\'")
+                    if platform.system() == "Windows":
+                        subprocess.run(f"python {pyfile + '.py'}", shell=True)
+                    else:
+                        subprocess.run(f"python3 {pyfile + '.py'}", shell=True)
                 elif line.startswith("break"):
                     break
 def execute_file(filename):
