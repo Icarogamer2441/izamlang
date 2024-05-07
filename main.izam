@@ -1,5 +1,5 @@
 start Main run
-import[teste]
+import[test]
 
 callfunc{test1}
 callpyfunc{test2}
