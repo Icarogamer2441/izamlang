@@ -64,6 +64,10 @@ class IcaTextEditor:
             "pyimport": "yellow",
             "repeat": "green",
             "break": "brown",
+            "data": "blue",
+            "addintdata": "limegreen",
+            "addstringdata": "limegreen",
+            "getdata": "yellow",
         }
 
         self.text_area.tag_remove("keyword", "1.0", tk.END)
