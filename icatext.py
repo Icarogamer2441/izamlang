@@ -68,6 +68,8 @@ class IcaTextEditor:
             "addintdata": "limegreen",
             "addstringdata": "limegreen",
             "getdata": "yellow",
+            "to": "limegreen",
+            "endata": "orange",
         }
 
         self.text_area.tag_remove("keyword", "1.0", tk.END)
