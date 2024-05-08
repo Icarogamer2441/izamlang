@@ -195,5 +195,14 @@ def execute_file(filename):
     else:
         print("file extension not accepted, use .izam has file extension")
 
-filename = input("what's your file? > ")
-execute_file(filename)
+filename = input("what's your file? 'inte' to interactive mode > ")
+if filename == "inte":
+    print("'exit' to exit")
+    while True:
+        code = input(">> ")
+        if code == "exit":
+            break
+        else:
+            interpret(code)
+else:
+    execute_file(filename)
