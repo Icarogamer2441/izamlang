@@ -7,6 +7,7 @@ functions = {}
 ifs = []
 pycodes = {}
 repeats = {}
+datas = {}
 
 def interpret(code):
     lines = code.split("\n")
@@ -169,6 +170,24 @@ def interpret(code):
                         subprocess.run(f"python3 {pyfile + '.py'}", shell=True)
                 elif line.startswith("break"):
                     break
+                elif line.startswith("data"):
+                    name = line.split("<")[1].split(">")[0].strip("\"\'")
+                    datas[name] = {}
+                elif line.startswith("addintdata"):
+                    dataname = line.split("<")[1].split(",")[0].strip("\"\'")
+                    datavarname = line.split(",")[1].split("> == ")[0].strip("\"\'")
+                    datavalue = line.split("> == ")[1].trip("\"\'")
+                    datas[dataname][datavarname] = int(datavalue)
+                elif line.startswith("addstringdata"):
+                    dataname = line.split("<")[1].split(",")[0].strip("\"\'")
+                    datavarname = line.split(",")[1].split("> == ")[0].strip("\"\'")
+                    datavalue = line.split("> == ")[1].split(" *endata")[0].strip("\"\'")
+                    datas[dataname][datavarname] = datavalue
+                elif line.startswith("getdata"):
+                    dataname = line.split("<")[1].split(",")[0].strip("\"\'")
+                    datavarname = line.split(",")[1].split("> to ")[0].strip("\"\'")
+                    varname = line.split("> to ")[1].strip("\"\'")
+                    variables[varname] = datas[dataname][datavarname]
 def execute_file(filename):
     if filename.endswith(".izam"):
         with open(filename, "r") as f:
