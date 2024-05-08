@@ -338,7 +338,8 @@ def inteinterpret(code):
                     restcode = code.split("# ")[1].split(" #codend")[0].strip("\"\'")
                     repeats[repeatname].append(restcode)
                 elif code.startswith(f"end{repeatname}"):
-                    interpret("\n".join(repeats[repeatname]))
+                    for i inj range(int(times)):
+                        interpret("\n".join(repeats[repeatname]))
                     break
         elif line.startswith("pyimport"):
             pyfile = line.split("[")[1].split("]")[0].strip("\"\'")
