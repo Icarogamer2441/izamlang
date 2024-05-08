@@ -354,7 +354,7 @@ def inteinterpret(code):
         elif line.startswith("addintdata"):
             dataname = line.split("<")[1].split(",")[0].strip("\"\'")
             datavarname = line.split(",")[1].split("> == ")[0].strip("\"\'")
-            datavalue = line.split("> == ")[1].trip("\"\'")
+            datavalue = line.split("> == ")[1].strip("\"\'")
             datas[dataname][datavarname] = int(datavalue)
         elif line.startswith("addstringdata"):
             dataname = line.split("<")[1].split(",")[0].strip("\"\'")
